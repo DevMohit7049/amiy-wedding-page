@@ -69,22 +69,22 @@ function ProductCard({
           </div>
         </div>
 
-        <div className="absolute top-0 right-0 w-[260px] h-[320px] pointer-events-none -translate-y-8">
+        <div className="absolute top-0 right-0 w-[280px] h-[300px] pointer-events-none -translate-y-6">
           <div className="relative w-full h-full">
             <img
               src={images.left}
               alt=""
-              className="absolute left-[100px] top-0 w-[130px] h-auto object-contain z-10"
+              className="absolute right-[140px] top-[20px] w-[100px] h-auto object-contain z-10"
             />
             <img
               src={images.center}
               alt=""
-              className="absolute left-[175px] top-[10px] w-[115px] h-auto object-contain z-20"
+              className="absolute right-[80px] top-[15px] w-[90px] h-auto object-contain z-20"
             />
             <img
               src={images.right}
               alt=""
-              className="absolute left-[190px] top-[6px] w-[160px] h-auto object-contain z-30"
+              className="absolute right-[10px] top-[0px] w-[130px] h-auto object-contain z-30"
             />
           </div>
         </div>
