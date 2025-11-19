@@ -221,6 +221,22 @@ export default function Index() {
                 <span className="text-[#383F20]">New </span>
                 <span className="text-[#B88083]">Launches</span>
               </h1>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => sliderRef.current?.slickPrev()}
+                  className="w-[24px] h-[24px] flex items-center justify-center bg-transparent hover:bg-[#383F20]/5 rounded-full transition-colors"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-4 h-4 text-[#383F20]/40 stroke-[2.5]" />
+                </button>
+                <button
+                  onClick={() => sliderRef.current?.slickNext()}
+                  className="w-[24px] h-[24px] flex items-center justify-center bg-transparent hover:bg-[#383F20]/5 rounded-full transition-colors"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-4 h-4 text-[#383F20] stroke-[2.5]" />
+                </button>
+              </div>
             </div>
 
             <div className="relative px-12">
