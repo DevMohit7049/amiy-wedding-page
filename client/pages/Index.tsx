@@ -98,7 +98,7 @@ const CustomPrevArrow = (props: any) => {
   return (
     <button
       onClick={onClick}
-      className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-[38px] h-[38px] flex items-center justify-center bg-transparent hover:bg-[#383F20]/5 rounded-full transition-colors"
+      className="hidden"
       aria-label="Previous"
     >
       <ChevronLeft className="w-6 h-6 text-[#383F20]/30 stroke-[2.5]" />
@@ -111,7 +111,7 @@ const CustomNextArrow = (props: any) => {
   return (
     <button
       onClick={onClick}
-      className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-[38px] h-[38px] flex items-center justify-center bg-transparent hover:bg-[#383F20]/5 rounded-full transition-colors"
+      className="hidden"
       aria-label="Next"
     >
       <ChevronRight className="w-6 h-6 text-[#383F20] stroke-[2.5]" />
