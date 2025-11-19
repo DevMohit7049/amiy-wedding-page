@@ -239,7 +239,7 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="relative px-12">
+            <div className="relative">
               <Slider ref={sliderRef} {...settings}>
                 {products.map((product, index) => (
                   <div key={index}>
