@@ -69,22 +69,22 @@ function ProductCard({
           </div>
         </div>
 
-        <div className="absolute top-0 right-0 w-[260px] h-[320px] pointer-events-none -translate-y-8">
+        <div className="absolute top-0 right-0 w-[280px] h-[320px] pointer-events-none -translate-y-8">
           <div className="relative w-full h-full">
             <img
               src={images.left}
               alt=""
-              className="absolute left-[100px] top-0 w-[130px] h-auto object-contain z-10"
+              className="absolute right-[160px] top-0 w-[100px] h-auto object-contain z-10"
             />
             <img
               src={images.center}
               alt=""
-              className="absolute left-[175px] top-[10px] w-[115px] h-auto object-contain z-20"
+              className="absolute right-[85px] top-[5px] w-[95px] h-auto object-contain z-20"
             />
             <img
               src={images.right}
               alt=""
-              className="absolute left-[190px] top-[6px] w-[160px] h-auto object-contain z-30"
+              className="absolute right-[-10px] top-0 w-[140px] h-auto object-contain z-30"
             />
           </div>
         </div>
@@ -98,7 +98,7 @@ const CustomPrevArrow = (props: any) => {
   return (
     <button
       onClick={onClick}
-      className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-[38px] h-[38px] flex items-center justify-center bg-transparent hover:bg-[#383F20]/5 rounded-full transition-colors"
+      className="hidden"
       aria-label="Previous"
     >
       <ChevronLeft className="w-6 h-6 text-[#383F20]/30 stroke-[2.5]" />
@@ -111,7 +111,7 @@ const CustomNextArrow = (props: any) => {
   return (
     <button
       onClick={onClick}
-      className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-[38px] h-[38px] flex items-center justify-center bg-transparent hover:bg-[#383F20]/5 rounded-full transition-colors"
+      className="hidden"
       aria-label="Next"
     >
       <ChevronRight className="w-6 h-6 text-[#383F20] stroke-[2.5]" />
@@ -221,9 +221,25 @@ export default function Index() {
                 <span className="text-[#383F20]">New </span>
                 <span className="text-[#B88083]">Launches</span>
               </h1>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => sliderRef.current?.slickPrev()}
+                  className="w-[24px] h-[24px] flex items-center justify-center bg-transparent hover:bg-[#383F20]/5 rounded-full transition-colors"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-4 h-4 text-[#383F20]/40 stroke-[2.5]" />
+                </button>
+                <button
+                  onClick={() => sliderRef.current?.slickNext()}
+                  className="w-[24px] h-[24px] flex items-center justify-center bg-transparent hover:bg-[#383F20]/5 rounded-full transition-colors"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-4 h-4 text-[#383F20] stroke-[2.5]" />
+                </button>
+              </div>
             </div>
 
-            <div className="relative px-12">
+            <div className="relative">
               <Slider ref={sliderRef} {...settings}>
                 {products.map((product, index) => (
                   <div key={index}>
@@ -231,6 +247,20 @@ export default function Index() {
                   </div>
                 ))}
               </Slider>
+              <img
+                loading="lazy"
+                srcSet="https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=100 100w, https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=200 200w, https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=400 400w, https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=800 800w, https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=1200 1200w, https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=1600 1600w, https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=2000 2000w, https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a"
+                style={{
+                  aspectRatio: "1.42",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  width: "100%",
+                  marginTop: "20px",
+                  minHeight: "20px",
+                  minWidth: "20px",
+                  overflow: "hidden",
+                }}
+              />
             </div>
           </div>
         </div>

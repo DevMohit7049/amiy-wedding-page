@@ -1,14 +1,779 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world project</title>
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmityWellness - New Launches</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <body>
-    <div id="root"></div>
+        html, body {
+            font-family: "DM Sans", "Inter", system-ui, sans-serif;
+            color: #4B4B4B;
+            background-color: white;
+            line-height: 1.6;
+        }
 
-    <script type="module" src="/client/App.tsx"></script>
-  </body>
+        /* Header Styles */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            border-bottom: 1px solid rgba(243, 224, 129, 0.2);
+            width: 100%;
+        }
+
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            font-size: 24px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo span.dark {
+            color: #383F20;
+        }
+
+        .logo span.accent {
+            color: #B88083;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #383F20;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #B88083;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 50%;
+        }
+
+        button:hover {
+            background-color: rgba(184, 128, 131, 0.1);
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* Main Content */
+        main {
+            min-height: 100vh;
+            background-color: white;
+        }
+
+        .new-launches-section {
+            position: relative;
+            width: 100%;
+            background: linear-gradient(to bottom right, #FFF5F5, #FFFBF0);
+            padding: 4rem 1rem;
+        }
+
+        .section-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .launches-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .launches-title {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            font-size: 56px;
+            letter-spacing: 1.48px;
+            text-transform: uppercase;
+            line-height: 130%;
+        }
+
+        .launches-title .dark {
+            color: #383F20;
+        }
+
+        .launches-title .accent {
+            color: #B88083;
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .carousel-btn {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .carousel-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+        }
+
+        .carousel-btn.prev svg {
+            color: rgba(56, 63, 32, 0.4);
+        }
+
+        .carousel-btn.next svg {
+            color: #383F20;
+        }
+
+        /* Carousel */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            transition: transform 0.5s ease-out;
+        }
+
+        .carousel-item {
+            flex: 0 0 calc(33.333% - 16px);
+            min-width: 0;
+        }
+
+        /* Product Card */
+        .product-card {
+            position: relative;
+        }
+
+        .card-content {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            background: linear-gradient(to bottom right, #F1BDBD, #FFFBEB);
+            min-height: 260px;
+            padding-top: 95px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 80px;
+        }
+
+        .card-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            background-color: #B88083;
+            border-top: 1px solid rgba(243, 224, 129, 0.3);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .card-title {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            font-size: 20px;
+            line-height: 130%;
+            letter-spacing: 0.44px;
+            text-transform: uppercase;
+            color: white;
+            margin-bottom: 0.25rem;
+            max-width: 240px;
+        }
+
+        .card-body {
+            position: relative;
+            z-index: 10;
+        }
+
+        .card-subtitle {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 130%;
+            letter-spacing: 0.34px;
+            text-transform: uppercase;
+            color: #B88083;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 13px;
+            line-height: 130%;
+            letter-spacing: 0.28px;
+            text-transform: capitalize;
+            color: #4B4B4B;
+            margin-bottom: 1.5rem;
+            max-width: 240px;
+        }
+
+        .price-section {
+            display: flex;
+            gap: 0.5rem;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
+        .price {
+            font-size: 20px;
+            line-height: 130%;
+            color: #4B4B4B;
+            font-weight: normal;
+        }
+
+        .original-price {
+            font-size: 20px;
+            line-height: 130%;
+            color: #939090;
+            text-decoration: line-through;
+            font-weight: normal;
+        }
+
+        .discount {
+            font-size: 17px;
+            line-height: 130%;
+            color: #A76A6D;
+            font-weight: normal;
+        }
+
+        .buy-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            padding: 0 1.25rem;
+            background-color: #B88083;
+            border: 1px solid #B88083;
+            color: white;
+            font-family: "DM Sans", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buy-btn:hover {
+            background-color: #A76A6D;
+        }
+
+        .buy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .product-images {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 320px;
+            pointer-events: none;
+            transform: translateY(-32px);
+        }
+
+        .images-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .product-img {
+            position: absolute;
+            object-fit: contain;
+        }
+
+        .img-left {
+            right: 160px;
+            top: 0;
+            width: 100px;
+            height: auto;
+            z-index: 10;
+        }
+
+        .img-center {
+            right: 85px;
+            top: 5px;
+            width: 95px;
+            height: auto;
+            z-index: 20;
+        }
+
+        .img-right {
+            right: -10px;
+            top: 0;
+            width: 140px;
+            height: auto;
+            z-index: 30;
+        }
+
+        /* Decorative Image */
+        .decorative-img {
+            width: 100%;
+            aspect-ratio: 1.42;
+            object-fit: cover;
+            object-position: center;
+            margin-top: 20px;
+            min-height: 20px;
+            min-width: 20px;
+            overflow: hidden;
+        }
+
+        /* Wedding Wellness Section */
+        .wellness-section {
+            padding: 5rem 1rem;
+            background-color: rgba(255, 251, 235, 0.4);
+        }
+
+        .wellness-container {
+            max-width: 56rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .wellness-title {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            font-size: 42px;
+            color: #383F20;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .wellness-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4B4B4B;
+            max-width: 42rem;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #383F20;
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h3 {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            font-size: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col h4 {
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: #B88083;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .launches-title {
+                font-size: 42px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .carousel-track {
+                gap: 16px;
+            }
+
+            .carousel-item {
+                flex: 0 0 calc(50% - 8px);
+            }
+
+            .new-launches-section {
+                padding: 3rem 1rem;
+            }
+
+            .launches-header {
+                margin-bottom: 2rem;
+            }
+
+            .card-title {
+                font-size: 18px;
+            }
+
+            .wellness-title {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .launches-title {
+                font-size: 32px;
+            }
+
+            .carousel-track {
+                gap: 12px;
+            }
+
+            .carousel-item {
+                flex: 0 0 100%;
+            }
+
+            .wellness-title {
+                font-size: 28px;
+            }
+
+            .header-container {
+                height: 60px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <span class="dark">Amity</span><span class="accent">Wellness</span>
+            </a>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#collections">Collections</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header-buttons">
+                <button aria-label="Shopping cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#383F20" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                </button>
+                <button class="menu-btn" id="menuBtn" aria-label="Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#383F20" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- New Launches Section -->
+        <div class="new-launches-section">
+            <div class="section-container">
+                <div class="launches-header">
+                    <h1 class="launches-title">
+                        <span class="dark">New </span>
+                        <span class="accent">Launches</span>
+                    </h1>
+                    <div class="carousel-controls">
+                        <button class="carousel-btn prev" id="prevBtn" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button class="carousel-btn next" id="nextBtn" aria-label="Next">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="carousel">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Products will be inserted here by JavaScript -->
+                    </div>
+                </div>
+
+                <img class="decorative-img" src="https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F72c80f114dc149019051b6852a9e3b7a?width=800" alt="Decorative image" loading="lazy">
+            </div>
+        </div>
+
+        <!-- Wedding Wellness Section -->
+        <section class="wellness-section">
+            <div class="wellness-container">
+                <h2 class="wellness-title">Wedding Wellness Collection</h2>
+                <p class="wellness-description">
+                    Curated wellness bundles designed to help you and your loved ones look and feel your absolute best for the big day.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><span class="dark">Amity</span><span class="accent">Wellness</span></h3>
+                    <p style="font-size: 14px; color: rgba(255, 255, 255, 0.7); line-height: 1.6;">
+                        Curated wellness bundles for your special day.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#collections">All Collections</a></li>
+                        <li><a href="#bride">For the Bride</a></li>
+                        <li><a href="#groom">For the Groom</a></li>
+                        <li><a href="#wedding-party">Wedding Party</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#about">Our Story</a></li>
+                        <li><a href="#ingredients">Ingredients</a></li>
+                        <li><a href="#sustainability">Sustainability</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#shipping">Shipping & Returns</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="year">2024</span> AmityWellness. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product Data
+        const products = [
+            {
+                title: "Pre-Wedding Glow Ritual",
+                subtitle: "For the Bride",
+                description: "Tranquil Tonic, Acne SOS, Gut Reset",
+                price: "₹11,040",
+                originalPrice: "₹ 12,000",
+                discount: "8% off",
+                images: {
+                    left: "https://api.builder.io/api/v1/image/assets/TEMP/0ebad63ee0c83270a7b3c5773235b070cc05fc37?width=290",
+                    center: "https://api.builder.io/api/v1/image/assets/TEMP/d181d80669e8ae1749d30f45aefba1145aae9b84?width=249",
+                    right: "https://api.builder.io/api/v1/image/assets/TEMP/d97e291ea7ecdd08a8cfabf940b0dd5fa13226fc?width=356"
+                }
+            },
+            {
+                title: "The Wingman Edit",
+                subtitle: "For the Groomsmen",
+                description: "Muscle Mercy, Tranquil Tonic, Gut Reset",
+                price: "₹11,040",
+                originalPrice: "₹ 12,000",
+                discount: "8% off",
+                images: {
+                    left: "https://api.builder.io/api/v1/image/assets/TEMP/6156e22e45fbeaca3e52456033c5ab33132229bd?width=290",
+                    center: "https://api.builder.io/api/v1/image/assets/TEMP/d181d80669e8ae1749d30f45aefba1145aae9b84?width=249",
+                    right: "https://api.builder.io/api/v1/image/assets/TEMP/d97e291ea7ecdd08a8cfabf940b0dd5fa13226fc?width=356"
+                }
+            },
+            {
+                title: "Bridesmaid's Brightening Kit",
+                subtitle: "For the Bride's Besties",
+                description: "Acne SOS, Gut Reset, Period Pacifier",
+                price: "₹11,040",
+                originalPrice: "₹ 12,000",
+                discount: "8% off",
+                images: {
+                    left: "https://api.builder.io/api/v1/image/assets/TEMP/0ebad63ee0c83270a7b3c5773235b070cc05fc37?width=290",
+                    center: "https://api.builder.io/api/v1/image/assets/TEMP/9a3e4db91570d4f71285ba034d117df0a0461abf?width=249",
+                    right: "https://api.builder.io/api/v1/image/assets/TEMP/a7db4bd75c355936c475bc7df971ad1f78b92591?width=356"
+                }
+            },
+            {
+                title: "Groom's Power Prep",
+                subtitle: "For the Groom",
+                description: "Muscle Mercy, Acne SOS, Tranquil Tonic",
+                price: "₹11,280",
+                originalPrice: "₹ 12,000",
+                discount: "6% off",
+                images: {
+                    left: "https://api.builder.io/api/v1/image/assets/TEMP/ad33659c33381eac40061641b81f19d65a13ad9f?width=290",
+                    center: "https://api.builder.io/api/v1/image/assets/TEMP/ad33659c33381eac40061641b81f19d65a13ad9f?width=249",
+                    right: "https://api.builder.io/api/v1/image/assets/TEMP/ad33659c33381eac40061641b81f19d65a13ad9f?width=356"
+                }
+            }
+        ];
+
+        // Carousel Variables
+        let currentIndex = 0;
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Initialize Carousel
+        function initCarousel() {
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.innerHTML = `
+                    <div class="product-card">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <h3 class="card-title">${product.title}</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-subtitle">${product.subtitle}</p>
+                                <p class="card-description">${product.description}</p>
+                                <div class="price-section">
+                                    <span class="price">${product.price}</span>
+                                    <span class="original-price">${product.originalPrice}</span>
+                                    ${product.discount ? `<span class="discount">${product.discount}</span>` : ''}
+                                </div>
+                                <button class="buy-btn">Buy It Now</button>
+                            </div>
+                        </div>
+                        <div class="product-images">
+                            <div class="images-container">
+                                <img src="${product.images.left}" alt="" class="product-img img-left" loading="lazy">
+                                <img src="${product.images.center}" alt="" class="product-img img-center" loading="lazy">
+                                <img src="${product.images.right}" alt="" class="product-img img-right" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                track.appendChild(item);
+            });
+
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const itemWidth = track.children[0].offsetWidth;
+            const gap = 24;
+            const offset = -(currentIndex * (itemWidth + gap));
+            track.style.transform = `translateX(${offset}px)`;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % products.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + products.length) % products.length;
+            updateCarousel();
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize
+        initCarousel();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Update carousel on window resize
+        window.addEventListener('resize', updateCarousel);
+    </script>
+</body>
 </html>
